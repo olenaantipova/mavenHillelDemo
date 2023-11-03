@@ -32,14 +32,14 @@ public class DateConverterTestNegative {
 
     @Test
     @Order(1)
-    public void testConvertDateWithInvalidInputFormat() {
-        try {
-            DateConverter.convertDate("2023-11-01", "yyyy-MM-dd", "dd/MM/yyyy");
-            fail("Expected DateTimeParseException, but no exception was thrown");
-        } catch (DateTimeParseException exception) {
-        }
+    public void testInvalidInputDateFormat (){
+        String invalidDate = "2023-11-03";
+        String inputFormat = "ddd-MM-yyyy";
+        String outputFormat = "MM/dd/yyyy";
+        assertThrows(DateTimeParseException.class, () -> {
+            DateConverter.convertDate(invalidDate,inputFormat,outputFormat);
+        });
     }
-
     @Order(3)
     @Test
     public void testConvertDateWithInvalidDateValue() {
@@ -48,11 +48,8 @@ public class DateConverterTestNegative {
 
     @Order(2)
     @Test
-    public void testConvertDateWithInvalidDate() {
-        try {
-            DateConverter.convertDate("2023/11/01", "yyyy/MM/dd", "dd-MM-yyyy");
-            fail("Expected DateTimeParseException, but no exception was thrown");
-        } catch (DateTimeParseException exception) {
-        }
+    public void testDetectDateFormatFailure() {
+        String invalidDate = "03-11-2023";
+        assertNull(DateConverter.detectDateFormat(invalidDate));
     }
 }
