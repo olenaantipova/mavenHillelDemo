@@ -21,11 +21,11 @@ public class MainPage {
         driver.findElement(logoutElementLocator).click();
     }
 
-    public void purchaseTheMostExpensive () {
+    public void purchaseTheMostExpensive() {
         driver.findElement(By.id("add-to-cart-sauce-labs-fleece-jacket")).click();
     }
 
-    public void openCart () {
+    public void openCart() {
         WebElement openCart = driver.findElement(By.xpath("//a[@class='shopping_cart_link']"));
         openCart.click();
     }
