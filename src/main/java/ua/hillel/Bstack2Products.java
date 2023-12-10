@@ -24,7 +24,7 @@ public class Bstack2Products extends BaseTest {
         WebElement cartQuantity = driver.findElement(By.xpath("//*[@class='bag__quantity']"));
         Assert.assertTrue(cartQuantity.isDisplayed(), "2");
         WebElement totalPrice = driver.findElement(By.xpath("//*[@class='sub-price__val']"));
-        Assert.assertEquals("$ 1798.00", "$ 1798.00");
+        Assert.assertEquals(totalPrice, "$ 1798.00");
         WebElement checkoutButton = driver.findElement(By.xpath("//*[@class='buy-btn']"));
         checkoutButton.click();
         Thread.sleep(2000);
