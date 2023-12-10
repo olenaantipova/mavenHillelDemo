@@ -5,8 +5,6 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
 
 public class Bstack2Products extends BaseTest {
 
@@ -24,7 +22,7 @@ public class Bstack2Products extends BaseTest {
         WebElement cartQuantity = driver.findElement(By.xpath("//*[@class='bag__quantity']"));
         Assert.assertTrue(cartQuantity.isDisplayed(), "2");
         WebElement totalPrice = driver.findElement(By.xpath("//*[@class='sub-price__val']"));
-        Assert.assertEquals(totalPrice, "$ 1798.00");
+        Assert.assertEquals(totalPrice.getText(), "$ 1798.00");
         WebElement checkoutButton = driver.findElement(By.xpath("//*[@class='buy-btn']"));
         checkoutButton.click();
         Thread.sleep(2000);
