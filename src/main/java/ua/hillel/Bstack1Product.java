@@ -13,7 +13,7 @@ public class Bstack1Product extends BaseTest {
         Thread.sleep(2000);
         WebElement cartClean =  driver.findElement(By.className("shelf-item__del"));
         cartClean.click();
-        WebElement continueShopping = (WebElement) driver.findElement(By.xpath("//p[@class='shelf-empty']"));
+        WebElement continueShopping = driver.findElement(By.className("shelf-empty"));
         continueShopping.click();
     }
 }
