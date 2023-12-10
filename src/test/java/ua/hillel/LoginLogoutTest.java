@@ -14,7 +14,7 @@ import java.util.Set;
 
 public class LoginLogoutTest {
     @Test
-    public void loginAndLogout() throws InterruptedException {
+    public void loginAndLogout() {
         WebDriverManager.chromedriver().setup();
         WebDriver driver = new ChromeDriver();
         driver.manage().window().setSize(new Dimension(1440, 1100));

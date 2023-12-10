@@ -13,7 +13,7 @@ import java.time.Duration;
 
 public class ProductPurchaseTest {
     @Test
-    public void productPurchase() throws InterruptedException {
+    public void productPurchase() {
         WebDriverManager.chromedriver().setup();
         WebDriver driver = new ChromeDriver();
         driver.manage().window().setSize(new Dimension(1440, 1100));

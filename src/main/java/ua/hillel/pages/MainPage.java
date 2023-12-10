@@ -11,14 +11,18 @@ public class MainPage {
     public MainPage(WebDriver driver) {
         this.driver = driver;
     }
+    public void openLinkedinPage() {
+        By linkElementLocator = By.xpath("//a[@href='https://www.linkedin.com/company/sauce-labs/']");
+        WebElement linkedinLink = driver.findElement(linkElementLocator);
+        linkedinLink.click();
+    }
 
     public void openMenu() {
         driver.findElement(By.id("react-burger-menu-btn")).click();
     }
 
     public void logout() {
-        By logoutElementLocator = By.id("logout_sidebar_link");
-        driver.findElement(logoutElementLocator).click();
+        driver.findElement(By.id("logout_sidebar_link")).click();
     }
 
     public void purchaseTheMostExpensive() {

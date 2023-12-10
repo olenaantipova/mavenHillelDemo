@@ -1,9 +1,7 @@
 package ua.hillel.pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-
+import org.testng.Assert;
 
 import java.util.Set;
 
@@ -14,16 +12,13 @@ public class LinkedinPage {
         this.driver = driver;
     }
 
-    public void openLinkedinPage() {
-        By linkElementLocator = By.xpath("//a[@href='https://www.linkedin.com/company/sauce-labs/']");
-        WebElement linkedinLink = driver.findElement(linkElementLocator);
-        linkedinLink.click();
-    }
-
     public void switchToLinkedinWindow() {
         Set<String> windowHandles = driver.getWindowHandles();
         String linkedinWindowHandle = (String) windowHandles.toArray()[1];
         driver.switchTo().window(linkedinWindowHandle);
+        String actualTitle = getPageTitle();
+        Assert.assertTrue(actualTitle.contains("LinkedIn"), "Page title doesn't contain LinkedIn");
+        driver.close();
     }
 
     public String getPageTitle() {

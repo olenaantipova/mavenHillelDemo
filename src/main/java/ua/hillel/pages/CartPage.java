@@ -31,4 +31,11 @@ public class CartPage {
         WebElement finishCheckout = driver.findElement(By.id("finish"));
         finishCheckout.click();
     }
+
+        public String getProductPrice() {
+            return driver.findElement(By.cssSelector(".inventory_item_price")).getText();
+        }
+        public String getTotalPriceWithTax() {
+        return String.valueOf(driver.findElement(By.xpath("//div[@class='summary_info_label summary_total_label']")));
+        }
 }
