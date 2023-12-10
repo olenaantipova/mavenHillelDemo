@@ -11,7 +11,7 @@ public class Bstack1Product extends BaseTest {
         WebElement addToCartButton = driver.findElement(By.xpath("(//*[@class='shelf-item__buy-btn'])[4]"));
         addToCartButton.click();
         Thread.sleep(2000);
-        WebElement cartClean = (WebElement) driver.findElement(By.xpath("//div[@class='shelf-item__del']"));
+        WebElement cartClean =  driver.findElement(By.className("shelf-item__del"));
         cartClean.click();
         WebElement continueShopping = (WebElement) driver.findElement(By.xpath("//p[@class='shelf-empty']"));
         continueShopping.click();
