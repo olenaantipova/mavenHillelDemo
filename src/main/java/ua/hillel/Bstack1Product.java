@@ -8,7 +8,7 @@ public class Bstack1Product extends BaseTest {
     @Test
     public void addToCartAndRemove() throws InterruptedException {
         driver.get("https://www.bstackdemo.com/");
-        WebElement addToCartButton = (WebElement) driver.findElement(By.xpath("(//*[@class='shelf-item__buy-btn'])[4]"));
+        WebElement addToCartButton = driver.findElement(By.xpath("(//*[@class='shelf-item__buy-btn'])[4]"));
         addToCartButton.click();
         Thread.sleep(2000);
         WebElement cartClean = (WebElement) driver.findElement(By.xpath("//div[@class='shelf-item__del']"));
