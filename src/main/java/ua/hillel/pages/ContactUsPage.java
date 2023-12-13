@@ -1,9 +1,9 @@
 package ua.hillel.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 
 import java.io.File;
 import java.net.URISyntaxException;
@@ -23,9 +23,8 @@ public class ContactUsPage {
         emailField.sendKeys(email);
     }
 
-    public void uploadFile() throws InterruptedException {
-
-        URL url = getClass().getClassLoader().getResource("text.txt");
+    public void uploadFile(String filename) {
+        URL url = getClass().getClassLoader().getResource(filename);
         if (url == null) throw new IllegalArgumentException("file not found");
         File file;
         try {
@@ -35,17 +34,16 @@ public class ContactUsPage {
         }
         WebElement input = driver.findElement(By.cssSelector("input[name='upload_file']"));
         input.sendKeys(file.getAbsolutePath());
-        Thread.sleep(2000);
+    }
+
+    public void skipAlert() {
+        driver.switchTo().alert().accept();
     }
 
     public void submitForm() {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollTo(0,document.body.scrollHeight)", "");
         WebElement submitButton = driver.findElement(By.xpath("//input[@name='submit']"));
         submitButton.click();
     }
-
-    public void checkSuccessMessage() {
-        WebElement successMessage = driver.findElement(By.cssSelector(".status.alert.alert-success"));
-        Assert.assertTrue(successMessage.isDisplayed(), "Success! Your details have been submitted successfully.");
-    }
-
 }

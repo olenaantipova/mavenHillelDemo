@@ -1,27 +1,19 @@
 package ua.hillel;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import ua.hillel.pages.ContactUsPage;
 import ua.hillel.pages.MainPage;
 
 import java.io.FileReader;
 import java.io.IOException;
-import java.time.Duration;
 import java.util.Properties;
 
-public class ContactUsTest {
+public class ContactUsTest extends BaseTest {
     @Test
-    public static void main(String[] args) throws InterruptedException {
-        WebDriver driver;
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-        driver.manage().window().setSize(new Dimension(1440, 1100));
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-        driver.get("https://automationexercise.com/");
+    public void checkContactUsForm()  {
 
         Properties userData = new Properties();
         try {
@@ -35,11 +27,12 @@ public class ContactUsTest {
 
         ContactUsPage contactUsPage = new ContactUsPage(driver);
         contactUsPage.fillForm(userData.getProperty("name"), userData.getProperty("email"));
-        contactUsPage.uploadFile();
+        contactUsPage.uploadFile("text.txt");
         contactUsPage.submitForm();
-        driver.switchTo().alert().accept();
+        contactUsPage.skipAlert();
 
-        contactUsPage.checkSuccessMessage();
-        driver.quit();
+        WebElement successMessage = driver.findElement(By.cssSelector(".status.alert.alert-success"));
+        Assert.assertTrue(successMessage.isDisplayed(), "Success! Your details have been submitted successfully.");
+
     }
 }
