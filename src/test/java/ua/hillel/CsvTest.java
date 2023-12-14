@@ -19,7 +19,7 @@ public class CsvTest extends BaseTest {
     private final String filePath = "target/downloads/csv file.csv";
 
     @Test
-    public void downloadFile() {
+    public void downloadFileAndCheckContent() throws IOException {
         driver.get("https://the-internet.herokuapp.com/download");
         String fileName = "csv file.csv";
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -29,6 +29,15 @@ public class CsvTest extends BaseTest {
         Assert.assertTrue(waitFileDownloaded(DOWNLOAD_FOLDER_PATH, fileName, 10));
 
         Assert.assertTrue(hasCorrectExtension(DOWNLOAD_FOLDER_PATH + "/" + fileName, ".csv"));
+
+        List<String> rows = Files.readAllLines(Paths.get(filePath));
+        List<String> headers = Arrays.asList(rows.get(0).split(","));
+        List<String> expectedHeaders = Arrays.asList("Manufacturer Id","Period","Glass - Mixed","Aluminium","PET - Clear","PET - Colour","HDPE","Liquid Paper Board","Steel","Other Materials");
+        Assert.assertEquals(headers, expectedHeaders, "CSV headers are wrong");
+
+        String expectedRow1 = "QM20000003,M2022-11,10,20,30,40,5,6,7,8";
+
+        Assert.assertTrue(rows.contains(expectedRow1));
     }
 
     public boolean hasCorrectExtension(String filePath, String extension) {
@@ -48,18 +57,6 @@ public class CsvTest extends BaseTest {
             }
         }
         return false;
-    }
-
-    @Test
-    public void CsvFileContentNio() throws IOException {
-        List<String> rows = Files.readAllLines(Paths.get(filePath));
-        List<String> headers = Arrays.asList(rows.get(0).split(","));
-        List<String> expectedHeaders = Arrays.asList("Manufacturer Id","Period","Glass - Mixed","Aluminium","PET - Clear","PET - Colour","HDPE","Liquid Paper Board","Steel","Other Materials");
-        Assert.assertEquals(headers, expectedHeaders, "CSV headers are wrong");
-
-        String expectedRow1 = "QM20000003,M2022-11,10,20,30,40,5,6,7,8";
-
-        Assert.assertTrue(rows.contains(expectedRow1));
     }
 
 }
